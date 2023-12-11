@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Page</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .game-container {
+            margin: 20px;
+        }
+
+        .game-image {
+            cursor: pointer;
+        }
+
+        #goback-button {
+            padding: 10px;
+            margin: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <img class="game-image" src="dinogoogle.png" alt="dino game" onclick="openGame('chrome://dino/')">
+    <p>dino</p>
+</div>
+
+<div class="game-container">
+    <img class="game-image" src="vex 5.jfif" alt="Game 2" onclick="openGame('https://vex5.io/#translate.google.com.sh')">
+    <p>Game 2</p>
+</div>
+
+<!-- Add more game containers as needed -->
+
+<button id="goback-button" onclick="goBack()">Go Back to Home</button>
+
+<script>
+    function openGame(gameUrl) {
+        window.open(gameUrl, '_blank');
+    }
+
+    function goBack() {
+        window.location.href = 'index.html';
+    }
+</script>
+
+</body>
+</html>
