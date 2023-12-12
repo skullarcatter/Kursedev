@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      transition: background-color 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #1f2229;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 15px;
+    }
+
+    button {
+      background-color: black;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      transform-origin: center;
+    }
+
+    button:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+
+    .settings-menu {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background-color: #282c35;
+      color: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .settings-menu label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .settings-menu button {
+      background-color: black;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .settings-menu button:hover {
+      background-color: #333;
+    }
+
+    .search-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 100px;
+    }
+
+    .container-text {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .search-bar-container {
+      border: 2px solid black;
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    .search-bar {
+      width: 300px;
+      height: 40px;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      outline: none;
+      background-color: #fff;
+      color: #282c35;
+    }
+
+    .search-button,
+    .games-button,
+    .settings-button {
+      background-color: black;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      transform-origin: center;
+    }
+
+    .search-button:hover,
+    .games-button:hover,
+    .settings-button:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+
+
+    body.theme-light {
+      background-color: #fff;
+      color: #333;
+    }
+
+    body.theme-dark {
+      background-color: #333;
+      color: #fff;
+    }
+
+    body.theme-strawberry {
+      background-color: #FF5A5F;
+      color: #fff;
+    }
+
+    body.theme-peach {
+      background-color: #FF8C61;
+      color: #fff;
+    }
+
+    body.theme-ocean {
+      background-color: #007EA7;
+      color: #fff;
+    }
+
+    body.theme-night-sky {
+      background-color: #0D1B2A;
+      color: #fff;
+    }
+    .overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .popup {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      position: relative; 
+    }
+
+    .popup a {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .exit-button {
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+    }
+    </style>
+    </head>
+    <body class="theme-light">
+  </style>
+</head>
+<body class="theme-light">
+  <div class="header">
+    <h1>Kursedev</h1>
+    <div class="buttons-container">
+      <button class="settings-button" onclick="toggleSettingsMenu()">Settings</button>
+      <button class="games-button" onclick="goToGamesPage()">Games</button>
+    </div>
+  </div>
+  <body class="theme-light">
+
+
+  <div class="settings-menu" id="settingsMenu">
+    <label for="tabTitle">Tab Title:</label>
+    <input type="text" id="tabTitle" placeholder="Enter new tab title">
+    <br>
+    <label for="tabLogo">Tab Logo:</label>
+    <input type="file" id="tabLogo" accept="image/*">
+    <br>
+    <label for="themeSelector">Select Theme:</label>
+    <select id="themeSelector" onchange="changeTheme()">
+      <option value="theme-light">Light</option>
+      <option value="theme-dark">Dark</option>
+      <option value="theme-strawberry">Strawberry</option>
+      <option value="theme-peach">Peach</option>
+      <option value="theme-ocean">Ocean</option>
+      <option value="theme-night-sky">Night Sky</option>
+    </select>
+    <br>
+    <button onclick="changeTabTitle()">Change</button>
+  </div>
+
+  <div class="search-container">
+    <div class="container-text">Kurse v1.3</div>
+    <div class="search-bar-container">
+      <input type="text" class="search-bar" placeholder="Search..." id="searchQuery">
+    </div>
+    <button class="search-button" onclick="performSearch()">Search</button>
+  </div>
+      
+ 
+    <div class="overlay" id="popupOverlay">
+      <div class="popup">
+        <p>Welcome to our site! Choose an option below:</p>
+        <a href="https://github.com/skullarcatter" target="_blank">GitHub</a>
+        <a href="https://discord.gg/xxvc2UGgM6" target="_blank">Discord</a>
+        <span class="exit-button" onclick="closePopup()">×</span>
+      </div>
+    </div>
+
+
+
+  <script>
+    function toggleSettingsMenu() {
+      var menu = document.getElementById("settingsMenu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+
+    function changeTabTitle() {
+      var newTitle = document.getElementById("tabTitle").value;
+      document.title = newTitle;
+    }
+
+    function performSearch() {
+      var searchQuery = document.getElementById("searchQuery").value.toLowerCase();
+      var searchUrl;
+
+      switch (searchQuery) {
+        case "youtube":
+          searchUrl = "https://www.youtube.com";
+          break;
+        case "discord":
+          searchUrl = "https://discord.com";
+          break;
+            break;
+          case "art class":
+            searchUrl = "https://discord.com";
+            break;
+            break;
+          case "shuttle":
+            searchUrl = "https://shuttle.rip/#/disfuhsduhfjsauuyfkohauhfjidhxsujfdfhuhfdjghfushuodfhjishbdviusuiodvhsuhdfuivhsxyidgvbiojkdsoghfuujaihuixcfhsuovhjsgduivhjicuhsdjigjosjdjhsduivyhcvjidshjcvhshdjkfvhsudhviksdhuifsdojuvhsjcohdsuhcudc0sdfsduihdihcusdgduhhfiosdhfhdfkjksghfdjisdsjkcshjkdfjsdhfjjsd";
+            break;          break;
+          case "github":
+            searchUrl = "https://github.com/";
+            break;        
+          break;
+          case "metallic":
+            searchUrl = "https://metalli.zc.al/#/DSJFSDfksjdioiosadhfhFHOHJHDJOhjfhjhJDHFJDNSCVNDSOJPODSAOJUFJpnjedsidmfvshgdfidks[nJOFDPOkohojpojdjosbkcvkdfksfkvkskdhfvmdajklhjmsxjvfhsjdflhsdfvnjsdhjkfgsduih%20hfdunhsjfhsdhgvjsjhdsyhiofvhsdhihvhsduicjghxfhwshdcvgbcfhivhsjddhfjhsdujfiosghdvjjhsiodhfvsduhfjhsf";
+            break;
+        default:
+          searchUrl = "https://www.google.com/search?q=" + encodeURIComponent(searchQuery);
+      }
+
+      window.location.href = searchUrl;
+    }
+
+    function goToGamesPage() {
+      window.location.href = "games.html";
+    }
+
+    function changeTheme() {
+      var themeSelector = document.getElementById("themeSelector");
+      var selectedTheme = themeSelector.options[themeSelector.selectedIndex].value;
+
+      document.body.className = ""; 
+
+     
+      document.body.classList.add(selectedTheme);
+    }
+    function changeTabTitle() {
+      var newTitle = document.getElementById("tabTitle").value;
+      document.title = newTitle;
+    }
+
+    function changeTheme() {
+      var themeSelector = document.getElementById("themeSelector");
+      var selectedTheme = themeSelector.options[themeSelector.selectedIndex].value;
+
+      document.body.className = ""; 
+
+
+      document.body.classList.add(selectedTheme);
+    }
+
+    document.getElementById("tabLogo").addEventListener("change", function () {
+      var logoInput = document.getElementById("tabLogo");
+      var logoFile = logoInput.files[0];
+
+      if (logoFile) {
+        console.log("Selected logo file: " + logoFile.name);
+
+
+      }
+    });
+
+
+      function showPopup() {
+        document.getElementById("popupOverlay").style.display = "flex";
+      }
+
+
+      function closePopup() {
+        document.getElementById("popupOverlay").style.display = "none";
+      }
+
+
+      window.onload = showPopup;
+    </script>
+
+
+
+  </script>
+</body>
+</html>
